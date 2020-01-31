@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => IsAdmin::class,
+        'g2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
     ];
 
     /**

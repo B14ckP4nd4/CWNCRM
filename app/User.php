@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'g2fa_secret'
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'g2fa_secret',
     ];
 
     /**
@@ -36,4 +36,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function setG2faSecretAttribute($value)
+    {
+        $this->attributes['g2fa_secret'] = encrypt($value);
+    }
+
+    public function getG2faSecretAttribute($value)
+    {
+        if(is_null($value)) return $value;
+        return decrypt($value);
+    }
+
+//    public function setGoogle2faSecretAttribute($value)
+////    {
+////        $this->attributes['g2fa_secret'] = encrypt($value);
+////    }
+////
+////    public function getGoogle2faSecretAttribute($value)
+////    {
+////        return decrypt($value);
+////    }
 }

@@ -16,6 +16,7 @@
     });
 
 
+    // Admin Routes
     Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function () {
 
         Route::middleware('isAdmin')->group(function (){
@@ -42,8 +43,36 @@
         });
     });
 
+    // users Routes
+    Route::prefix('/user')->middleware(['auth','g2fa'])->name('user.')->namespace('User')->group(function (){
+
+        Route::get('/', 'DashboardController@index')->name('home');
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        // Confirm Pass Route
+        Route::prefix('/settings')->middleware('password.confirm')->namespace('Settings')->name('settings.')->group(function (){
+            Route::get('/', 'ProfileSettingsController@index')->name('home');
+
+
+            Route::prefix('/2fa')->namespace('twoFactorAuth')->name('twoFactor.')->group(function (){
+
+                Route::prefix('/google')->namespace('Google')->name('google.')->group(function (){
+                    Route::get('/', 'GoogleAuthenticatorController@index')->name('index');
+                    Route::get('/activate', 'GoogleAuthenticatorController@activate')->name('activate');
+                    Route::get('/deActivate', 'GoogleAuthenticatorController@deActivate')->name('activate');
+                    Route::get('/reActivate', 'GoogleAuthenticatorController@reActivate')->name('activate');
+                    Route::POST('/validate', 'GoogleAuthenticatorController@validateCode')->name('validate');
+                });
+
+            });
+
+        });
+    });
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::post('/g2fa', function () {
+        return redirect(URL()->previous());
+    })->name('g2fa')->middleware('g2fa');
