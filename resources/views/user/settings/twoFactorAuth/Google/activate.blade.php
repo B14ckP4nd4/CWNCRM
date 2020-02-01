@@ -12,13 +12,6 @@
                         <div>
                             <img src="{{ $QR_Image }}">
                         </div>
-                        @if (!@$reauthenticating)
-                        <p>You must set up your Google Authenticator app before continuing. You will be unable to login otherwise</p>
-                        <div>
-                            <a href="/complete-registration"><button class="btn-primary">Complete Registration</button></a>
-                        </div>
-                        @endif
-
                         <form method="POST" action="{{ route('user.settings.twoFactor.google.validate') }}" >
                                 @csrf
 
@@ -27,6 +20,8 @@
 
                                 <div class="col-md-6">
                                     <input id="googleAuth" type="text" class="form-control @error('googleAuth') is-invalid @enderror" name="googleAuth" value="{{ old('googleAuth') }}" required autocomplete="name" autofocus>
+
+                                    <input type="hidden" name="secret" value="{{ $secret_encrypted }}" required>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +38,6 @@
                                     </button>
                                 </div>
                             </div>
-
                         </form>
 
                     </div>

@@ -1,63 +1,80 @@
 <?php
 
-namespace App\Http\Controllers\User\Settings\twoFactorAuth\Google;
+    namespace App\Http\Controllers\User\Settings\twoFactorAuth\Google;
 
-use App\Http\Middleware\Authenticate;
-use Auth;
-use App\Http\Controllers\Controller;
-use Illuminate\Auth\Middleware\RequirePassword;
-use Illuminate\Http\Request;
+    use App\Http\Middleware\Authenticate;
+    use App\Http\Requests\User\Settings\twoFactorAuth\Google\GoogleAuthCode;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Auth\Middleware\RequirePassword;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Redirect;
+    use PragmaRX\Google2FA\Google2FA;
 
-class GoogleAuthenticatorController extends Controller
-{
-
-    public function __construct()
+    class GoogleAuthenticatorController extends Controller
     {
-        $this->middleware([
-            'auth',
-            'password.confirm'
-        ]);
-    }
 
-    // Source = https://scotch.io/tutorials/how-to-add-googles-two-factor-authentication-to-laravel
+        private $user;
+        private $google2fa;
 
-    public function index()
-    {
-        return 'This is Index of User/Settings/Google';
-    }
-
-    public function validateCode()
-    {
-        $validate = Request()->validate([
-            ''
-        ]);
-        dd(Request()->all());
-    }
-
-    public function activate()
-    {
-        $user = \Auth::user();
-        $google2fa = app('pragmarx.google2fa');
-        if(empty($user->g2fa_secret)){
-            $user->g2fa_secret = $google2fa->generateSecretKey();
-            $user->save();
+        public function __construct()
+        {
+            $this->google2fa = new Google2FA();
         }
 
-//        dd($user->g2fa_secret);
-        $QR_Image = $google2fa->getQRCodeInline(
-            config('app.name'),
-            $user->email,
-            $user->g2fa_secret
-        );
+        // Source = https://scotch.io/tutorials/how-to-add-googles-two-factor-authentication-to-laravel
 
-        return view('user.settings.twoFactorAuth.Google.activate', ['QR_Image' => $QR_Image,
-            'secret' => $user->google2fa_secret,
-            'reauthenticating' => true
-        ]);
-//        return 'This is Authenticator';
+        public function index()
+        {
+            return 'This is Index of User/Settings/Google';
+        }
+
+        public function validateCode(GoogleAuthCode $request)
+        {
+
+            $user = \Auth::user();
+
+            $secret = decrypt($request->secret);
+
+            $validateCode = $this->google2fa->verifyKey($secret, $request->googleAuth);
+
+            if (!$validateCode) {
+                return back();
+            }
+
+            $user->g2fa_secret = $secret;
+            $user->save();
+
+            dd($validateCode);
+        }
+
+        public function activate()
+        {
+
+            $user = \Auth::user();
+
+            if(!empty($user->g2fa_secret)){
+                return 'Your Authenticator Already Activated !';
+            }
+
+            if (empty($user->g2fa_secret)) {
+                $user->g2fa_secret = $this->google2fa->generateSecretKey();
+//                $user->save();
+            }
+
+            $this->google2fa = (new \PragmaRX\Google2FAQRCode\Google2FA());
+            $QR_Image = $this->google2fa->getQRCodeInline(
+                config('app.name'),
+                $user->email,
+                $user->g2fa_secret
+            );
+
+
+            return view('user.settings.twoFactorAuth.Google.activate', ['QR_Image' => $QR_Image,
+                'secret' => $user->g2fa_secret,
+                'secret_encrypted' => encrypt($user->g2fa_secret),
+            ]);
+
+        }
+
+
     }
-
-
-
-
-}

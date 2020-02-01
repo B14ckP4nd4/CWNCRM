@@ -24,7 +24,8 @@ class GoogleAuthCode extends FormRequest
     public function rules()
     {
         return [
-            'googleAuth' => 'required'
+            'googleAuth' => 'required',
+            'secret' => 'required',
         ];
     }
 

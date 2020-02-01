@@ -26,20 +26,16 @@
 
 
         Route::namespace('Auth')->group(function(){
-
             //Login Routes
             Route::get('/login','LoginController@showLoginForm')->name('login');
             Route::post('/login','LoginController@login');
             Route::post('/logout','LoginController@logout')->name('logout');
-
             //Forgot Password Routes
             Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
             Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-
             //Reset Password Routes
             Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
             Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-
         });
     });
 
@@ -49,9 +45,9 @@
         Route::get('/', 'DashboardController@index')->name('home');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         // Confirm Pass Route
-        Route::prefix('/settings')->middleware('password.confirm')->namespace('Settings')->name('settings.')->group(function (){
-            Route::get('/', 'ProfileSettingsController@index')->name('home');
+        Route::prefix('/settings')->middleware(['password.confirm'])->namespace('Settings')->name('settings.')->group(function (){
 
+            Route::get('/', 'ProfileSettingsController@index')->name('home');
 
             Route::prefix('/2fa')->namespace('twoFactorAuth')->name('twoFactor.')->group(function (){
 
@@ -73,6 +69,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::post('/g2fa', function () {
-        return redirect(URL()->previous());
-    })->name('g2fa')->middleware('g2fa');
+Route::post('/g2fa', function () {
+    return redirect(URL()->previous());
+})->name('g2fa')->middleware('g2fa');
