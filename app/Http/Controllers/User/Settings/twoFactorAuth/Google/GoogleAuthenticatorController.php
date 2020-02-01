@@ -2,18 +2,12 @@
 
     namespace App\Http\Controllers\User\Settings\twoFactorAuth\Google;
 
-    use App\Http\Middleware\Authenticate;
     use App\Http\Requests\User\Settings\twoFactorAuth\Google\GoogleAuthCode;
     use App\Http\Controllers\Controller;
-    use Illuminate\Auth\Middleware\RequirePassword;
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Redirect;
     use PragmaRX\Google2FA\Google2FA;
 
     class GoogleAuthenticatorController extends Controller
     {
-
-        private $user;
         private $google2fa;
 
         public function __construct()
@@ -58,7 +52,6 @@
 
             if (empty($user->g2fa_secret)) {
                 $user->g2fa_secret = $this->google2fa->generateSecretKey();
-//                $user->save();
             }
 
             $this->google2fa = (new \PragmaRX\Google2FAQRCode\Google2FA());
