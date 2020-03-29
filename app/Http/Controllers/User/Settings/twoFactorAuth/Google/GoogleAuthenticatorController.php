@@ -19,7 +19,17 @@
 
         public function index()
         {
-            return 'This is Index of User/Settings/Google';
+            $user = \Auth::user();
+
+            dd($user->isG2faValid());
+            if(is_null($user->g2fa_secret))
+            {
+                return 'Your authentication is inactive !';
+            }
+            else
+            {
+                return 'Your authentication is Active !';
+            }
         }
 
         public function validateCode(GoogleAuthCode $request)
@@ -38,7 +48,7 @@
             $user->g2fa_secret = $secret;
             $user->save();
 
-            dd($validateCode);
+            return "Your G2FA has been activated !";
         }
 
         public function activate()

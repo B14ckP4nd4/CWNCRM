@@ -22,6 +22,11 @@
         Route::middleware('isAdmin')->group(function (){
             Route::get('/', 'HomeController@index');
             Route::get('/dashboard', 'HomeController@index')->name('home');
+
+
+            Route::name('server.')->namespace('Server')->group(function (){
+                Route::resource('server' , 'ServersController');
+            });
         });
 
 
@@ -40,7 +45,7 @@
     });
 
     // users Routes
-    Route::prefix('/user')->middleware(['auth','g2fa'])->name('user.')->namespace('User')->group(function (){
+    Route::prefix('/user')->middleware(['auth','g2fa','verified'])->name('user.')->namespace('User')->group(function (){
 
         Route::get('/', 'DashboardController@index')->name('home');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
@@ -65,7 +70,7 @@
     });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -46,6 +46,11 @@ class User extends Authenticatable
     public function getG2faSecretAttribute($value)
     {
         return (is_null($value)) ? $value : decrypt($value) ;
+    }
+
+    public function isG2faValid()
+    {
+        return ($this->g2fa_secret)? true : false;
     }
 
 //    public function setGoogle2faSecretAttribute($value)
