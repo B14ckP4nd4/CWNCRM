@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "03485ef3265d115f588d47486128eacb",
+    "content-hash": "e5512b3d7419c7b79999b7cdfc5a6e89",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -57,16 +57,16 @@
         },
         {
             "name": "blackpanda/encryptor",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/B14ckP4nd4/encryptor.git",
-                "reference": "de66bfef39ab24e2d3026b5ba30f936b198dd0a4"
+                "reference": "8ba004ce83831ba7361811f444c3c9d01509b07c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/B14ckP4nd4/encryptor/zipball/de66bfef39ab24e2d3026b5ba30f936b198dd0a4",
-                "reference": "de66bfef39ab24e2d3026b5ba30f936b198dd0a4",
+                "url": "https://api.github.com/repos/B14ckP4nd4/encryptor/zipball/8ba004ce83831ba7361811f444c3c9d01509b07c",
+                "reference": "8ba004ce83831ba7361811f444c3c9d01509b07c",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
                     "email": "B14ckP4nd4@protonmail.com"
                 }
             ],
-            "time": "2020-02-22T19:21:25+00:00"
+            "time": "2020-04-01T21:09:22+00:00"
         },
         {
             "name": "blackpanda/virt",
@@ -1958,16 +1958,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
                 "shasum": ""
             },
             "require": {
@@ -2001,7 +2001,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01T11:05:21+00:00"
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "psr/simple-cache",

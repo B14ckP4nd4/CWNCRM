@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2",
         "bacon/bacon-qr-code": "^2.0",
-        "blackpanda/encryptor": "v1.0.1",
+        "blackpanda/encryptor": "^1.0",
         "blackpanda/virt": "1.0.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",

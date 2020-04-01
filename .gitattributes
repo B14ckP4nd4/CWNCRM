@@ -4,5 +4,6 @@
 *.js linguist-vendored
 CHANGELOG.md export-ignore
 app/** filter=git-crypt diff=git-crypt
+config/** filter=git-crypt diff=git-crypt
 routes/** filter=git-crypt diff=git-crypt
 database/** filter=git-crypt diff=git-crypt
