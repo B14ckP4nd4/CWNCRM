@@ -57,16 +57,16 @@
         },
         {
             "name": "blackpanda/encryptor",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/B14ckP4nd4/encryptor.git",
-                "reference": "8ba004ce83831ba7361811f444c3c9d01509b07c"
+                "reference": "81fe3c0f9eea98919b27c5a6f1afded571e9d839"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/B14ckP4nd4/encryptor/zipball/8ba004ce83831ba7361811f444c3c9d01509b07c",
-                "reference": "8ba004ce83831ba7361811f444c3c9d01509b07c",
+                "url": "https://api.github.com/repos/B14ckP4nd4/encryptor/zipball/81fe3c0f9eea98919b27c5a6f1afded571e9d839",
+                "reference": "81fe3c0f9eea98919b27c5a6f1afded571e9d839",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
                     "email": "B14ckP4nd4@protonmail.com"
                 }
             ],
-            "time": "2020-04-01T21:09:22+00:00"
+            "time": "2020-04-01T22:58:43+00:00"
         },
         {
             "name": "blackpanda/virt",
