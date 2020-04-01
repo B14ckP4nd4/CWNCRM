@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        blackpanda\virt\VirtualizorServiceProvider::class,
+
 
         /*
          * Application Service Providers...
