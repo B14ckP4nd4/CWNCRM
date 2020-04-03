@@ -19,7 +19,10 @@
 <body>
 @include('layouts.admin.navbar')
 
-@yield('content')
+<section class="section">
+    @yield('content')
+</section>
 
 </body>
+@include('layouts.admin.footer')
 </html>

@@ -1,0 +1,6 @@
+#create_server_form .select {
+    width: 100% !important;
+}
+#create_server_form select {
+    width: 100% !important;
+}

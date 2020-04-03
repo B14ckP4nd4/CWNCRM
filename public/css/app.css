@@ -1,4 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);#create_server_form .select {
+    width: 100% !important;
+}
+#create_server_form select {
+    width: 100% !important;
+}
+@charset "UTF-8";
 
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com

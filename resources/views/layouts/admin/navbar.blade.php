@@ -27,7 +27,7 @@
                         <a class="navbar-item" href="{{route('admin.server.index')}}">
                             List Servers
                         </a>
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="{{route('admin.server.create')}}">
                             Add Server
                         </a>
                     </div>
